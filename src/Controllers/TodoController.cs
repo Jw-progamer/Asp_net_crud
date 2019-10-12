@@ -39,6 +39,17 @@ namespace src.Controllers
             return todo;
         }
 
+        [HttpGet("getbytopic/{idTopic}")]
+        public ActionResult<List<Todo>> GetByTopic(long idTopic)
+        {
+            var todo = _context.TodoItems.Where( todo => todo.TopicId == idTopic).ToList();
+            if (todo == null)
+            {
+                return NotFound();
+            }
+            return todo;
+        }
+
         // POST api/todo
         [HttpPost("")]
         public ActionResult<Todo> Post([FromBody] Todo todo)
